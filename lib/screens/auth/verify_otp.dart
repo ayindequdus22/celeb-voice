@@ -30,7 +30,7 @@ class VerifyOtpScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.r),
         child: Column(
-          spacing: 10.h,
+          spacing: 5.h,
           children: [
             20.verticalSpace,
             Text(
@@ -48,7 +48,11 @@ class VerifyOtpScreen extends StatelessWidget {
             30.verticalSpace,
             OtpTextField(
               numberOfFields: 5,
-              borderColor: Color(0xFF512DA8),
+              fieldWidth: 45.w,
+              fieldHeight: 60.h,
+              enabledBorderColor: themeContext.colorScheme.onPrimaryContainer,
+              borderColor: themeContext.colorScheme.primary,
+              borderRadius: BorderRadius.circular(10.r),
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               //runs when a code is typed in
@@ -68,8 +72,18 @@ class VerifyOtpScreen extends StatelessWidget {
                 );
               }, // end onSubmit
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("You didn't get any code?"),
+                TextButton(onPressed: () {}, child: Text("Resend Code")),
+              ],
+            ),
+            50.verticalSpace,
             ElevatedButton(
-              onPressed: () => Get.toNamed("/auth/reset-password"),
+              onPressed: () => {
+                 Get.toNamed("/auth/reset-password")
+              },
               child: Text("Verify OTP"),
             ),
           ],

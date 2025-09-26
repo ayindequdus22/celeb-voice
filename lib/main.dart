@@ -3,6 +3,7 @@ import 'package:celeb_voice/screens/auth/login.dart';
 import 'package:celeb_voice/screens/auth/register.dart';
 import 'package:celeb_voice/screens/auth/reset_password.dart';
 import 'package:celeb_voice/screens/auth/verify_otp.dart';
+import 'package:celeb_voice/screens/home_screen.dart';
 import 'package:celeb_voice/screens/welcome.dart';
 import 'package:celeb_voice/themes/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: (RouteSettings e) {
             switch (e.name) {
               case "/":
-                return getPage(widget: VerifyOtpScreen());
+                return getPage(widget: HomeScreen());
               case "/auth/login":
                 return getPage(widget: LoginScreen());
               case "/auth/register":
