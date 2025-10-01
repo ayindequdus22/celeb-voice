@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-final FocusNode focusNode;
+  final FocusNode focusNode;
 
   MySliverHeaderDelegate({required this.focusNode});
   @override
@@ -14,6 +14,7 @@ final FocusNode focusNode;
   ) {
     return Container(
       color: Theme.of(context).colorScheme.surface,
+      padding: EdgeInsets.symmetric(horizontal: 10.r),
       alignment: Alignment.center,
       child: Column(
         children: [
