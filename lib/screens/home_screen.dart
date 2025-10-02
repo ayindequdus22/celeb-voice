@@ -1,7 +1,10 @@
 import 'package:celeb_voice/model/home_celebrity.dart';
+import 'package:celeb_voice/widgets/home/home_tab_bar_view.dart';
 import 'package:celeb_voice/widgets/home/sliver_header.dart';
+import 'package:celeb_voice/widgets/home/tabbar_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen>
     final FocusNode focusNode = FocusNode();
 
     return Scaffold(
-      body: SafeArea(
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 15.r),
         child: GestureDetector(
           onTap: () => focusNode.unfocus(),
           child: NestedScrollView(
@@ -56,32 +60,65 @@ class _HomeScreenState extends State<HomeScreen>
                         style: themeContext.textTheme.titleSmall,
                       ),
                       5.verticalSpace,
+
                       SizedBox(
                         height: 75.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 10,
+                          itemCount: celebModel.length + 1, // +1 for "View All"
                           physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10.r),
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 30.r,
-                                  backgroundImage: AssetImage(
-                                    celebModel[index].image,
+                          itemBuilder: (context, index) {
+                            if (index == celebModel.length) {
+                              // Last item = View All
+                              return Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10.r),
+                                alignment: Alignment.center,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // Navigate to all celebs page
+                                  },
+                                  child: Text(
+                                    "View All",
+                                    style: themeContext.textTheme.bodySmall
+                                        ?.copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                5.verticalSpace,
-                                Text(
-                                  celebModel[index].name,
-                                  style: themeContext.textTheme.bodySmall,
+                              );
+                            }
+
+                            // Normal celeb item
+                            final celeb = celebModel[index];
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 10.r),
+                              child: InkWell(
+                                onTap: () => Get.toNamed(
+                                  "/celeb-page",
+                                  arguments: celeb,
                                 ),
-                              ],
-                            ),
-                          ),
+                                child: Column(
+                                  children: [
+                                    Hero(
+                                      tag: celeb.image,
+                                      child: CircleAvatar(
+                                        radius: 30.r,
+                                        backgroundImage: AssetImage(
+                                          celeb.image,
+                                        ),
+                                      ),
+                                    ),
+                                    5.verticalSpace,
+                                    Text(
+                                      celeb.name,
+                                      style: themeContext.textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
+
                       20.verticalSpace,
                       Text(
                         "Categories",
@@ -96,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen>
               /// TabBar (pinned below header)
               SliverPersistentHeader(
                 pinned: true,
-                delegate: _TabBarDelegate(
+                delegate: TabBarDelegate(
                   TabBar(
                     physics: const BouncingScrollPhysics(),
                     dividerColor: Colors.transparent,
@@ -118,107 +155,10 @@ class _HomeScreenState extends State<HomeScreen>
             ],
 
             /// TabBarView Content
-            body: TabBarView(
-              controller: _tabController,
-              children: [
-                /// Music Tab -> Grid
-                Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.all(10.r),
-                    itemCount: celebModel.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10.w,
-                      mainAxisSpacing: 10.h,
-                      mainAxisExtent: 150.h,
-                      // childAspectRatio: 0.93,
-                    ),
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final celeb = celebModel[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          // color: themeContext.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.r),
-                                topRight: Radius.circular(10.r),
-                              ),
-                              child: Image.asset(
-                                celeb.image,
-                                height: 120.h,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                                alignment: Alignment.topCenter,
-                              ),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10.r),
-                                bottomRight: Radius.circular(10.r),
-                              ),
-                              child: Container(
-                                height: 30.h,
-                                alignment: Alignment.center,
-
-                                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                                child: Text(
-                                  celeb.name,
-                                  style: themeContext.textTheme.bodyMedium,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                /// Other tabs (placeholders for now)
-                const Center(child: Text("Acting")),
-                const Center(child: Text("Sports")),
-                const Center(child: Text("Influencer")),
-                const Center(child: Text("Gaming")),
-                const Center(child: Text("Theatre")),
-                const Center(child: Text("Comedy")),
-                const Center(child: Text("Fashion")),
-              ],
-            ),
+            body: homeTabView(themeContext, _tabController),
           ),
         ),
       ),
     );
   }
-}
-
-/// TabBar Delegate for SliverPersistentHeader
-class _TabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar tabBar;
-  _TabBarDelegate(this.tabBar);
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  Widget build(context, shrinkOffset, overlapsContent) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_TabBarDelegate oldDelegate) => false;
 }

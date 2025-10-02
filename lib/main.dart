@@ -1,3 +1,5 @@
+import 'package:celeb_voice/model/home_celebrity.dart';
+import 'package:celeb_voice/screens/celeb_page.dart';
 import 'package:celeb_voice/screens/home_screen.dart';
 import 'package:celeb_voice/screens/forgot_password.dart';
 import 'package:celeb_voice/screens/auth/login.dart';
@@ -45,6 +47,14 @@ class MyApp extends StatelessWidget {
                 return getPage(widget: VerifyOtpScreen());
               case "/auth/reset-password":
                 return getPage(widget: ResetPassword());
+
+
+
+              case "/home":
+              return getPage(widget: HomeScreen());
+              case "/celeb-page":
+               final args = e.arguments as HomeCelebrityModel; 
+                return getPage(widget: CelebPage(celeb:args));  
               default:
                 return getPage(widget: WelcomeScreen());
             }
