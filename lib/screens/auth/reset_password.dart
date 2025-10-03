@@ -41,7 +41,7 @@ class ResetPassword extends StatelessWidget {
             ),
             Text(
               "Your new password must be unique",
-              style: themeContext.textTheme.bodyMedium!.copyWith(
+              style: themeContext.textTheme.titleSmall!.copyWith(
                 color: context.theme.colorScheme.onPrimaryContainer,
               ),
               // textAlign: TextAlign.center,

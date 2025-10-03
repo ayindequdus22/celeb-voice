@@ -44,9 +44,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 color: context.theme.colorScheme.primary,
               ),
             ),
+            5.verticalSpace,
             Text(
               "Please enter your email address",
-              style: themeContext.textTheme.bodyMedium!.copyWith(
+              style: themeContext.textTheme.titleSmall!.copyWith(
                 color: context.theme.colorScheme.onPrimaryContainer,
               ),
               // textAlign: TextAlign.center,

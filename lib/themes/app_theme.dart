@@ -10,8 +10,6 @@ class AppTheme {
     BuildContext context,
     TextTheme textTheme,
   ) {
-    // final themeContext = Theme.of(context);
-
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
@@ -22,10 +20,9 @@ class AppTheme {
         labelPadding: EdgeInsets.symmetric(horizontal: 12.0.w),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(
-          color: colorScheme.onPrimaryContainer,
-          fontSize: 16.sp,
-        ),
+        hintStyle: Theme.of(
+          context,
+        ).textTheme.bodyLarge!.copyWith(color: colorScheme.onPrimaryContainer),
 
         filled: true,
         errorStyle: TextStyle(
@@ -50,9 +47,9 @@ class AppTheme {
           minimumSize: WidgetStatePropertyAll(Size(double.infinity, 50.h)),
           splashFactory: InkSparkle.splashFactory,
           textStyle: WidgetStatePropertyAll(
-            Theme.of(
-              context,
-            ).textTheme.titleLarge!.copyWith(color: Colors.white),
+            Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Colors.white,
+            ),
           ),
           backgroundColor: WidgetStatePropertyAll(colorScheme.primary),
           shape: WidgetStatePropertyAll(

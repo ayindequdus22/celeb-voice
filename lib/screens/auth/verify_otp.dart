@@ -41,7 +41,7 @@ class VerifyOtpScreen extends StatelessWidget {
             ),
             Text(
               "OTP has been sent to your mail",
-              style: themeContext.textTheme.bodyMedium!.copyWith(
+              style: themeContext.textTheme.titleSmall!.copyWith(
                 color: context.theme.colorScheme.onPrimaryContainer,
               ),
             ),
@@ -75,7 +75,8 @@ class VerifyOtpScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("You didn't get any code?"),
+                Text("You didn't get any code?",
+                    style: themeContext.textTheme.bodyMedium),
                 TextButton(onPressed: () {}, child: Text("Resend Code")),
               ],
             ),

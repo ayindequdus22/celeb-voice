@@ -50,7 +50,10 @@ class ContinueDivider extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  Text(
+                    "Don't have an account?",
+                    style: context.textTheme.bodyMedium,
+                  ),
                   TextButton(
                     onPressed: () => Get.toNamed("/auth/register"),
                     child: const Text("Sign up"),

@@ -11,7 +11,7 @@ class AuthInput extends StatelessWidget {
       spacing: 5.h,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(labelText),
+        Text(labelText, style: Theme.of(context).textTheme.bodyMedium),
         TextFormField(
           decoration: InputDecoration(
             hintText: hintText,
@@ -44,7 +44,7 @@ class _AuthPasswordInputState extends State<AuthPasswordInput> {
       spacing: 5.h,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.labelText),
+        Text(widget.labelText, style: Theme.of(context).textTheme.bodyMedium),
         TextFormField(
           obscureText: isobsecure,
           decoration: InputDecoration(

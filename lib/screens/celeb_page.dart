@@ -93,19 +93,30 @@ class CelebPage extends StatelessWidget {
                 ),
               ],
             ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.r),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  20.verticalSpace,
+
+                  Text(
+                    celeb.name,
+                    style: themeContext.textTheme.titleLarge!.copyWith(
+                      color: themeContext.colorScheme.primary,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Text(celeb.description),
+                ],
+              ),
+            ),
           ],
         ),
+
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: themeContext.colorScheme.onSecondary,
-                spreadRadius: 1, // Spread radius
-                blurRadius: 3, // Blur radius
-                offset: Offset(0, 3), // Shadow position (x, y)
-              ),
-            ],
-          ),
+          decoration: BoxDecoration(color: themeContext.colorScheme.surface),
           padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.h),
           child: ElevatedButton(
             onPressed: () {},

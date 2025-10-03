@@ -11,6 +11,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeContext = Theme.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.r),
         child: Column(
