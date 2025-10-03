@@ -35,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
     final FocusNode focusNode = FocusNode();
 
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 15.r),
+      body: SafeArea(
         child: GestureDetector(
           onTap: () => focusNode.unfocus(),
           child: NestedScrollView(
@@ -46,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen>
                 delegate: MySliverHeaderDelegate(focusNode: focusNode),
                 floating: true,
               ),
-
+            
               /// Trending Celebs
               SliverToBoxAdapter(
                 child: Padding(
@@ -57,10 +56,10 @@ class _HomeScreenState extends State<HomeScreen>
                       20.verticalSpace,
                       Text(
                         "Trending celebs",
-                        style: themeContext.textTheme.titleSmall,
+                        style: themeContext.textTheme.titleMedium,
                       ),
                       5.verticalSpace,
-
+            
                       SizedBox(
                         height: 75.h,
                         child: ListView.builder(
@@ -85,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               );
                             }
-
+            
                             // Normal celeb item
                             final celeb = celebModel[index];
                             return Container(
@@ -109,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     5.verticalSpace,
                                     Text(
                                       celeb.name,
-                                      style: themeContext.textTheme.bodySmall,
+                                      style: themeContext.textTheme.bodyMedium,
                                     ),
                                   ],
                                 ),
@@ -118,18 +117,18 @@ class _HomeScreenState extends State<HomeScreen>
                           },
                         ),
                       ),
-
+            
                       20.verticalSpace,
                       Text(
                         "Categories",
-                        style: themeContext.textTheme.titleSmall,
+                        style: themeContext.textTheme.titleMedium,
                       ),
                       5.verticalSpace,
                     ],
                   ),
                 ),
               ),
-
+            
               /// TabBar (pinned below header)
               SliverPersistentHeader(
                 pinned: true,
@@ -153,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             ],
-
+            
             /// TabBarView Content
             body: homeTabView(themeContext, _tabController),
           ),

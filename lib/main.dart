@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: (RouteSettings e) {
             switch (e.name) {
               case "/":
-                return getPage(widget: ResetPassword());
+                return getPage(widget: HomeScreen());
               case "/auth/login":
                 return getPage(widget: LoginScreen());
               case "/auth/register":

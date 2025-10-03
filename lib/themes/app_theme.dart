@@ -47,9 +47,9 @@ class AppTheme {
           minimumSize: WidgetStatePropertyAll(Size(double.infinity, 50.h)),
           splashFactory: InkSparkle.splashFactory,
           textStyle: WidgetStatePropertyAll(
-            Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.white,
-            ),
+            Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(color: Colors.white),
           ),
           backgroundColor: WidgetStatePropertyAll(colorScheme.primary),
           shape: WidgetStatePropertyAll(
@@ -67,6 +67,7 @@ class AppTheme {
           ),
         ),
       ),
+     
     );
   }
 
